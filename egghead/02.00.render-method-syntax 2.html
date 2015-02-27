@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/JSXTransformer.js"></script>
+</head>
+<body>
+
+
+<div id="a"></div>
+<div id="b"></div>
+
+<script type="text/jsx">
+
+    var App1 = React.createClass({
+
+        /* error, reason returning 2 nodes: <h1> and <b>
+
+            render:function(){
+              return (
+                  <h1>jsx</h1>
+                  <b>bold</b>
+              )
+            }
+
+            Correction:
+                must wrapt <h1> and <b> in a <div> so that one node is returned.
+        */
+
+        render:function(){
+          return (
+            <div>
+              <h1>jsx</h1>
+              <b>bold</b>
+            </div>
+          )
+        }
+    });
+    React.render(<App1 />, document.getElementById('a'));
+
+    var App2 = React.createClass({
+
+        /* error:
+           when not using "()" after "return"
+           jsx must be in the same line with "return":
+
+            render:function(){
+              return
+                    <div>
+                          <h1>jsx2</h1>
+                          <b>bold2</b>
+                    </div>
+
+            }
+        */
+
+        render:function(){
+          return <div>
+                      <h1>jsx2</h1>
+                      <b>bold2</b>
+                </div>
+
+        }
+    })
+
+    React.render(<App2 />, document.getElementById('b'));
+
+</script>
+
+
+
+<script>
+
+
+</script>
+
+</body>
+</html>

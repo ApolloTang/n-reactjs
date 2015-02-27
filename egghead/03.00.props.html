@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World</title>
+    <script src="http://localhost:8001/js/lib/react-v0.12.2.js"></script>
+    <script src="http://localhost:8001/js/lib/JSXTransformer-v0.12.2.js"></script>
+</head>
+<body>
+
+
+<div id="a"></div>
+<div id="b"></div>
+
+<script type="text/jsx">
+
+    var App1 = React.createClass({
+        render:function(){
+            console.log('arg: ', this.props.arg);
+            return (
+                <div>
+                    <h1>{this.props.arg}</h1>
+                    <b>bold</b>
+                </div>
+            )
+        }
+    });
+    React.render(<App1 arg = "argument pass to App1" />, document.getElementById('a'));
+
+</script>
+
+
+
+<script>
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/JSXTransformer.js"></script>
+</head>
+<body>
+
+
+<div id="a"></div>
+<div id="b"></div>
+<div id="c"></div>
+<div id="d"></div>
+<script type="text/jsx">
+
+    // this a react component
+    var App1 = React.createClass({
+        render:function(){
+          return <h1>jsx</h1>
+        }
+    });
+
+    React.render(<App1 />, document.getElementById('a'));
+
+</script>
+
+
+
+<script>
+
+    var App2 = React.createClass({
+        render: function(){
+            return React.DOM.h1(null, "pure js using React.DOM");
+        }
+    });
+    React.render(App2(), document.getElementById('b'));
+
+    var App3 = React.createClass({
+        render: function(){
+            return React.createElement("h1", null, "pure js using React.createElement");
+        }
+    });
+    React.render(App3(), document.getElementById('c'));
+
+    // use createElement to exe compoments
+    React.render(React.createElement(App3), document.getElementById('d'));
+
+</script>
+
+</body>
+</html>
