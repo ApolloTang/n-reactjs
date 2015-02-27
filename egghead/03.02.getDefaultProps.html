@@ -15,10 +15,15 @@
 <script type="text/jsx">
 
     var App1 = React.createClass({
+        getDefaultProps: function(){
+            return {
+                arg_num_required: 3 // will throw warning if not specified
+            }
+        },
         propTypes:{
             arg_str: React.PropTypes.string,
             arg_num_optional:React.PropTypes.number,
-            arg_num_required:React.PropTypes.number.isRequired  // will throw warning bc it is not not specified in <App1 />
+            arg_num_required:React.PropTypes.number.isRequired  // will NOT throw warning bc it is specified in getDefaultProps
         },
         render:function(){
             return (
@@ -39,12 +44,6 @@
         );
 
 </script>
-
-
-
-<script>
-
-
 </script>
 
 </body>
