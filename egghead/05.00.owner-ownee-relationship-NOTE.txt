@@ -1,0 +1,4 @@
+owner-ownee relationship vs. parent-child relationship.
+what is the different ?
+
+
