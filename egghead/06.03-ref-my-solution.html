@@ -52,9 +52,9 @@
         render:function(){
             return (
                 <div>
-                    <Slider id="red"   ref="red"   update={this.updateColor} /> <label for="red"  >App:red: {this.state.red}  </label>
-                    <Slider id="green" ref="green" update={this.updateColor} /> <label for="green">App:green: {this.state.green}</label>
-                    <Slider id="blue"  ref="blue"  update={this.updateColor} /> <label for="blue" >App:blue: {this.state.blue} </label>
+                    <Slider id="red"   ref="red"   update={this.updateColor} /> <label htmlFor="red"  >App:red: {this.state.red}  </label>
+                    <Slider id="green" ref="green" update={this.updateColor} /> <label htmlFor="green">App:green: {this.state.green}</label>
+                    <Slider id="blue"  ref="blue"  update={this.updateColor} /> <label htmlFor="blue" >App:blue: {this.state.blue} </label>
                </div>
             )
         }
