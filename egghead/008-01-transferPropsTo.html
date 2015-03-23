@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+  <!-- can not use bellow, font fail to load due to cors violiation -->
+  <!-- <link rel="stylesheet" href="http://localhost:8001/bootstrap/v&#45;3.3.1/dist/css/bootstrap.min.css" /> -->
+    <script src="http://localhost:8001/js/lib/react-v0.12.2.js"></script>
+    <script src="http://localhost:8001/js/lib/JSXTransformer-v0.12.2.js"></script>
+</head>
+<body>
+
+<div id="a"></div>
+<div id="b"></div>
+
+<script type="text/jsx">
+    /** @jsx React.DOM */
+    var BButton = React.createClass({
+            render:function(){
+
+                // With this.transferProps(), "clasName" property specided at
+                // where this component is called will be passed into this component
+                // Thus, the bellow anchor tag will be rendered repective as:
+                //     <a class="btn btn-primary">, <a class="btn btn-success">, and <a class="btn btn-danger">
+
+                return this.transferPropsTo( <a className="btn"> {this.props.children} </a> );
+            }
+        });
+
+    var APP = React.createClass({
+            render:function(){
+                return (
+                    <div>
+                        <BButton className="btn-primary">React</BButton>
+                        <BButton className="btn-success">React</BButton>
+                        <BButton className="btn-danger" >React</BButton>
+                    </div>
+                );
+            }
+        });
+
+    React.render( <APP />, document.body)</script>
+
+</body>
+</html>
