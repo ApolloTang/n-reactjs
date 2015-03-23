@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title></title>
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+  <!-- can not use bellow, font fail to load due to cors violiation -->
   <!-- <link rel="stylesheet" href="http://localhost:8001/bootstrap/v&#45;3.3.1/dist/css/bootstrap.min.css" /> -->
     <script src="http://localhost:8001/js/lib/react-v0.12.2.js"></script>
     <script src="http://localhost:8001/js/lib/JSXTransformer-v0.12.2.js"></script>
@@ -15,32 +16,34 @@
 
 <script type="text/jsx">
     /** @jsx React.DOM */
-    var APP =
-        React.createClass({
+    var BButton = React.createClass({
             render:function(){
+
+                console.log('BButton this.props.children: ', this.props.children); // ["I ", ReactElement, " React"]
+
                 return (
-                        <BButton>I <BHeart /> React</BButton>
-                    )
+                    <a className="btn btn-primary">
+                        {this.props.children}
+                    </a>
+                )
             }
         });
 
-    var BButton =
-        React.createClass({
-            render:function(){
-                return <a className="btn btn-primary">{this.props.children}</a>
-            }
-        });
-
-    var BHeart =
-        React.createClass({
+    var BHeart = React.createClass({
             render:function(){
                 return <span className="glyphicon glyphicon-heart"></span>
             }
         });
 
-    React.renderComponent(
-        <APP />,
-        document.body)</script>
+    var APP = React.createClass({
+            render:function(){
+                return (
+                        <BButton>I&nbsp;<BHeart />&nbsp;React</BButton>
+                    )
+            }
+        });
+
+    React.render( <APP />, document.body)</script>
 
 </body>
 </html>
