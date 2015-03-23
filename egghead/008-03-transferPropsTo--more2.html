@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+  <!-- can not use bellow, font fail to load due to cors violiation -->
+  <!-- <link rel="stylesheet" href="http://localhost:8001/bootstrap/v&#45;3.3.1/dist/css/bootstrap.min.css" /> -->
+    <script src="http://localhost:8001/js/lib/react-v0.12.2.js"></script>
+    <script src="http://localhost:8001/js/lib/JSXTransformer-v0.12.2.js"></script>
+</head>
+<body>
+
+<div id="a"></div>
+<div id="b"></div>
+
+<script type="text/jsx">
+    /** @jsx React.DOM */
+    var BButton = React.createClass({
+            render:function(){
+                return this.transferPropsTo( <a className="btn"> {this.props.children} </a> );
+            }
+        });
+
+    var BIcon = React.createClass({
+            render: function(){
+                return this.transferPropsTo( <span className="glyphicon"></span> );
+            }
+        });
+
+    var APP = React.createClass({
+            render:function(){
+                return (
+                    <div>
+                        <BButton href="javascript:alert('heart')"  className="btn-primary"><BIcon className="glyphicon-heart"  />&nbsp;React</BButton>
+                        <BButton href="javascript:alert('pencil')" className="btn-success"><BIcon className="glyphicon-pencil" />&nbsp;React</BButton>
+                        <BButton href="javascript:alert('inbox')"  className="btn-danger" ><BIcon className="glyphicon-inbox"  />&nbsp;React</BButton>
+                    </div>
+                );
+            }
+        });
+
+    React.render( <APP />, document.body)</script>
+
+</body>
+</html>
