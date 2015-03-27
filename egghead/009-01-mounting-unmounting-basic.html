@@ -26,22 +26,27 @@
                 this.setProps({val:newVal})
             },
 
+            // first
             componentWillMount:function(){
-                console.log("component Will Mount")
+                console.log("[1] component Will Mount")
             },
 
-            componentDidMount:function(){
-                console.log("component Did Mount")
-            },
-
-            componentWillUnmount:function(){
-                console.log("component Will Unmount")
-            },
-
+            // second
             render:function(){
-                console.log("render")
+                console.log("[2] render")
                 return <button onClick={this.update}>{this.props.val}</button>
-            }
+            },
+
+            // third
+            componentDidMount:function(){
+                console.log("[3] component Did Mount")
+            },
+
+            // forth
+            componentWillUnmount:function(){
+                console.log("[4] component Will Unmount")
+            },
+
 
 
         });
