@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+  <!-- can not use bellow, font fail to load due to cors violiation -->
+  <!-- <link rel="stylesheet" href="http://localhost:8001/bootstrap/v&#45;3.3.1/dist/css/bootstrap.min.css" /> -->
+    <script src="http://localhost:8001/js/lib/react-v0.12.2.js"></script>
+    <script src="http://localhost:8001/js/lib/JSXTransformer-v0.12.2.js"></script>
+</head>
+<body>
+
+<button onClick="render()">Render</button>
+<button onClick="unmount()">Unmount</button>
+<hr />
+<div id="panel"></div>
+
+<script type="text/jsx">
+    /** @jsx React.DOM */
+    var APP =
+        React.createClass({
+
+            update:function(){
+                var newVal = this.props.val+1
+                this.setProps({val:newVal})
+            },
+
+            componentWillMount:function(){
+                console.log("component Will Mount")
+            },
+
+            componentDidMount:function(){
+                console.log("component Did Mount")
+            },
+
+            componentWillUnmount:function(){
+                console.log("component Will Unmount")
+            },
+
+            render:function(){
+                console.log("render")
+                return <button onClick={this.update}>{this.props.val}</button>
+            }
+
+
+        });
+
+        window.render = function(){
+            React.renderComponent( <APP val={0} />, document.getElementById('panel'))
+        }
+        window.unmount = function(){
+            React.unmountComponentAtNode(document.getElementById('panel'))
+        }
+</script>
+</body>
+</html>
