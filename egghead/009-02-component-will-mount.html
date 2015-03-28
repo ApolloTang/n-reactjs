@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+  <!-- can not use bellow, font fail to load due to cors violiation -->
+  <!-- <link rel="stylesheet" href="http://localhost:8001/bootstrap/v&#45;3.3.1/dist/css/bootstrap.min.css" /> -->
+    <script src="http://localhost:8001/js/lib/react-v0.12.2.js"></script>
+    <script src="http://localhost:8001/js/lib/JSXTransformer-v0.12.2.js"></script>
+</head>
+<body>
+
+<button onClick="render()">Render</button>
+<button onClick="unmount()">Unmount</button>
+<hr />
+<div id="panel"></div>
+
+<script type="text/jsx">
+    /** @jsx React.DOM */
+    var APP =
+        React.createClass({
+
+            update:function(){
+                var newVal = this.props.val+1
+                this.setProps({val:newVal})
+            },
+
+            // first
+            componentWillMount:function(){
+                console.log("[1] component Will Mount")
+
+                // this.props is avalable here:
+                console.log(this.props.val === 0) // true
+
+                // you can set state here:
+                this.setState({myState:'state 1'});
+
+            },
+
+            // second
+            render:function(){
+                console.log("[2] render")
+
+                console.log('this.state.mystate: ', this.state.myState);
+
+                return <button onClick={this.update}>{this.props.val}</button>
+            },
+
+            // third
+            componentDidMount:function(){
+                console.log("[3] component Did Mount")
+            },
+
+            // forth
+            componentWillUnmount:function(){
+                console.log("[4] component Will Unmount")
+            },
+
+
+
+        });
+
+        window.render = function(){
+            React.renderComponent( <APP val={0} />, document.getElementById('panel'))
+        }
+        window.unmount = function(){
+            React.unmountComponentAtNode(document.getElementById('panel'))
+        }
+</script>
+</body>
+</html>
