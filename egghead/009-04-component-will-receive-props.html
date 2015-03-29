@@ -25,26 +25,27 @@
             },
 
             updateState:function(){
+                console.log('updating sate');
                 var newState = this.state.myState+1;
                 this.setState({myState:newState});
             },
 
             updateProps:function(){
+                console.log('updating props');
                 var newVal = this.props.val+1;
                 this.setProps({val:newVal});
             },
 
             // first
             componentWillMount:function(){
-                console.log("[1] component Will Mount")
+                console.log("[1 component Will Mount ]")
             },
 
             // second
             render:function(){
 
-                console.log("[2] render " + Date.now());
-                console.log("[2] props.val after update: ", this.props.val);
-                console.log("[2] state.mySatate after update: ", this.state.myState );
+                console.log("[2 render               ] props.val after update: ", this.props.val);
+                console.log("[2 render               ] state.myState after update: ", this.state.myState );
                 return (
                     <div>
                         <p>state: {this.state.myState}</p>
@@ -57,33 +58,27 @@
 
             // third
             componentDidMount:function(){
-                console.log("[3] component Did Mount")
-
-                // you have access to dom here
-                console.log('[3] dom: ', this.getDOMNode() );
-
+                console.log("[3 component Did Mount  ]")
             },
 
             // forth
             componentWillReceiveProps: function(){
-                console.log("[4]  componentWillReceiveProps() is executed on props updated, will not executed on state updated");
 
                 // This method is not called for the initial render.
                 // This method is not called for when state change via setState().
 
                 // Use this as an opportunity to react to a prop transition
-                // before render() is called by updating the state using
-                // this.setState()
+                // before render() is trigger via this.setState()
 
-                // calling setState() will not trigger render
+                // calling setState() inside this method will not trigger render
 
-
-                console.log("[4] props.val before update: ", this.props.val);
+                console.log("[4 comp'll receive props] props.val before update: ", this.props.val);
+                console.log("[4 comp'll receive props] props.state before update: ", this.state.myState);
             },
 
             // fifth
             componentWillUnmount:function(){
-                console.log("[5] component Will Unmount")
+                console.log("[5 component'll unmount ]")
             },
 
         });
