@@ -22,7 +22,7 @@
             },
 
             updateState:function(){
-                console.log('updating state');
+                console.log('updating sate');
                 var newState = this.state.myState+1;
                 this.setState({myState:newState});
             },
@@ -38,46 +38,42 @@
             },
 
             componentWillReceiveProps: function(){
+                console.log("[2 comp'll receive props]");
+            },
 
-                // This method only invoked when props receive new value.
-                //      This method is invoked prior to rendering (but not for the first rendering).
-                //      This method is not called for when state change via setState().
+            shouldComponentUpdate: function(nextProps, nextState) {
+                console.log("[3 should Comp update   ]");
+                return true;
+            },
 
-                // Use this method to intercept old props before it is update.
-
-                // Use this method as an opportunity to react to a prop transition
-                // before render() is trigger via this.setState()
-
-
-                console.log("[2 comp'll receive props] props.val before update: ", this.props.val);
-                console.log("[2 comp'll receive props] props.state before update: ", this.state.myState);
-                // NOTE: you have no access to the new props or state, only the prevous props or state
-
-                // NOTE: calling setState() inside this method will not trigger render
+            componentWillUpdate: function(nextProps, nextState) {
+                console.log("[4 Comp Will Update     ]");
             },
 
             render:function(){
 
-                console.log("[3 render               ] props.val after update: ", this.props.val);
-                console.log("[3 render               ] state.myState after update: ", this.state.myState );
+                console.log("[5 render               ] props.val after update: ", this.props.val);
+                console.log("[5 render               ] state.myState after update: ", this.state.myState );
                 return (
                     <div>
                         <p>state: {this.state.myState}</p>
                         <p>props.val: {this.props.val}</p>
-                        <button onClick={this.updateState}>update state (note 1)</button>
-                        <button onClick={this.updateProps}>update props (note 2)</button>
-                        <p>note 1: will NOT invoke componentWillReceiveProps</p>
-                        <p>note 2: will invoke componentWillReceiveProps</p>
+                        <button onClick={this.updateState}>update state</button>
+                        <button onClick={this.updateProps}>update props</button>
                     </div>
                 )
             },
 
             componentDidMount:function(){
-                console.log("[4 component Did Mount  ]")
+                console.log("[6 component Did Mount  ]")
+            },
+
+            componentDidUpdate: function(prevProps, prevState) {
+                console.log("[7 Comp Did Update      ]");
             },
 
             componentWillUnmount:function(){
-                console.log("[5 component'll unmount ]")
+                console.log("[8 component'll unmount ]")
             },
 
         });
