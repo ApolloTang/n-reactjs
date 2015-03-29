@@ -3,9 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <!-- <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" /> -->
-  <!-- can not use bellow, font fail to load due to cors violiation -->
-  <!-- <link rel="stylesheet" href="http://localhost:8001/bootstrap/v&#45;3.3.1/dist/css/bootstrap.min.css" /> -->
     <script src="http://localhost:8001/js/lib/react-v0.12.2.js"></script>
     <script src="http://localhost:8001/js/lib/JSXTransformer-v0.12.2.js"></script>
 </head>
@@ -25,7 +22,7 @@
             },
 
             updateState:function(){
-                console.log('updating sate');
+                console.log('updating state');
                 var newState = this.state.myState+1;
                 this.setState({myState:newState});
             },
@@ -50,8 +47,10 @@
                     <div>
                         <p>state: {this.state.myState}</p>
                         <p>props.val: {this.props.val}</p>
-                        <button onClick={this.updateState}>update state</button>
-                        <button onClick={this.updateProps}>update props</button>
+                        <button onClick={this.updateState}>update state (note 1)</button>
+                        <button onClick={this.updateProps}>update props (note 2)</button>
+                        <p>note 1: will NOT invoke componentWillReceiveProps</p>
+                        <p>note 2: will invoke componentWillReceiveProps</p>
                     </div>
                 )
             },
@@ -64,18 +63,21 @@
             // forth
             componentWillReceiveProps: function(){
 
-                // This method is not called for the initial render.
-                // This method is not called for when state change via setState().
+                // This method only invoked when props receive new value.
+                //      This method is invoked prior to rendering (but not for the first rendering).
+                //      This method is not called for when state change via setState().
 
                 // Use this method to intercept old props before it is update.
 
                 // Use this method as an opportunity to react to a prop transition
                 // before render() is trigger via this.setState()
 
-                // calling setState() inside this method will not trigger render
 
                 console.log("[4 comp'll receive props] props.val before update: ", this.props.val);
                 console.log("[4 comp'll receive props] props.state before update: ", this.state.myState);
+                // NOTE: you have no access to the new props or state, only the prevous props or state
+
+                // NOTE: calling setState() inside this method will not trigger render
             },
 
             // fifth
@@ -86,7 +88,7 @@
         });
 
         window.render = function(){
-            React.renderComponent( <APP val={0} />, document.getElementById('panel'))
+            React.render( <APP val={0} />, document.getElementById('panel'))
         }
         window.unmount = function(){
             React.unmountComponentAtNode(document.getElementById('panel'))
