@@ -3,9 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <!-- <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" /> -->
-  <!-- can not use bellow, font fail to load due to cors violiation -->
-  <!-- <link rel="stylesheet" href="http://localhost:8001/bootstrap/v&#45;3.3.1/dist/css/bootstrap.min.css" /> -->
     <script src="http://localhost:8001/js/lib/react-v0.12.2.js"></script>
     <script src="http://localhost:8001/js/lib/JSXTransformer-v0.12.2.js"></script>
 </head>
@@ -36,16 +33,37 @@
                 this.setProps({val:newVal});
             },
 
-            // first
             componentWillMount:function(){
                 console.log("[1 component Will Mount ]")
             },
 
-            // second
+            componentWillReceiveProps: function(){
+                console.log("[2 comp'll receive props]");
+            },
+
+            shouldComponentUpdate: function(nextProps, nextState) {
+               // [!!] Since this method is call before render, I think it makes more sense
+               // to call this method "shouldComponentToBeUpdate"
+
+                console.log("[3 should Comp update   ] before update,   this.props: ", this.props);
+                console.log("[3 should Comp update   ] props to become, nextProps:  ", nextProps);
+                console.log("[3 should Comp update   ] before update,   this.state: ", this.state);
+                console.log("[3 should Comp update   ] state to become, nextState:  ", nextState);
+
+                // Invoked before rendering when new props OR state are being received.
+                // This method is not called for the initial render
+                // This method is not called for when forceUpdate is used.
+
+                return true;
+                // if returns of this method is false, then render() will be skipped.
+                // (In addition, componentWillUpdate and componentDidUpdate will not be called.)
+
+                // You return false when transition to the new props and state will not require a component update.
+            },
             render:function(){
 
-                console.log("[2 render               ] props.val after update: ", this.props.val);
-                console.log("[2 render               ] state.myState after update: ", this.state.myState );
+                console.log("[4 render               ] props.val after update: ", this.props.val);
+                console.log("[4 render               ] state.myState after update: ", this.state.myState );
                 return (
                     <div>
                         <p>state: {this.state.myState}</p>
@@ -58,33 +76,9 @@
 
             // third
             componentDidMount:function(){
-                console.log("[3 component Did Mount  ]")
+                console.log("[5 component Did Mount  ]")
             },
 
-            // forth
-            componentWillReceiveProps: function(){
-                console.log("[4 comp'll receive props]");
-            },
-
-            shouldComponentUpdate: function(nextProps, nextState) {
-               // [!!] Since this method is call before render, I think it make more sense
-               // to call this method "shouldComponentToBeUpdate"
-
-                console.log("[5 should Comp update   ] before update,   this.props: ", this.props);
-                console.log("[5 should Comp update   ] props to become, nextProps:  ", nextProps);
-                console.log("[5 should Comp update   ] before update,   this.state: ", this.state);
-                console.log("[5 should Comp update   ] state to become, nextState:  ", nextState);
-
-                // Invoked before rendering when new props OR state are being received.
-                // This method is not called for the initial render
-                // This method is not called for when forceUpdate is used.
-
-                return true;
-                // if returns of this method is false, then render() will be skipped.
-                // (In addition, componentWillUpdate and componentDidUpdate will not be called.)
-
-                // You return false when transition to the new props and state will not require a component update.
-            },
 
             // fifth
             componentWillUnmount:function(){
@@ -94,7 +88,7 @@
         });
 
         window.render = function(){
-            React.renderComponent( <APP val={0} />, document.getElementById('panel'))
+            React.render( <APP val={0} />, document.getElementById('panel'))
         }
         window.unmount = function(){
             React.unmountComponentAtNode(document.getElementById('panel'))
