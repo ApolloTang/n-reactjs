@@ -33,34 +33,10 @@
                 this.setProps({val:newVal});
             },
 
-            // first
             componentWillMount:function(){
                 console.log("[1 component Will Mount ]")
             },
 
-            // second
-            render:function(){
-
-                console.log("[2 render               ] props.val after update: ", this.props.val);
-                console.log("[2 render               ] state.myState after update: ", this.state.myState );
-                return (
-                    <div>
-                        <p>state: {this.state.myState}</p>
-                        <p>props.val: {this.props.val}</p>
-                        <button onClick={this.updateState}>update state (note 1)</button>
-                        <button onClick={this.updateProps}>update props (note 2)</button>
-                        <p>note 1: will NOT invoke componentWillReceiveProps</p>
-                        <p>note 2: will invoke componentWillReceiveProps</p>
-                    </div>
-                )
-            },
-
-            // third
-            componentDidMount:function(){
-                console.log("[3 component Did Mount  ]")
-            },
-
-            // forth
             componentWillReceiveProps: function(){
 
                 // This method only invoked when props receive new value.
@@ -73,12 +49,33 @@
                 // before render() is trigger via this.setState()
 
 
-                console.log("[4 comp'll receive props] props.val before update: ", this.props.val);
-                console.log("[4 comp'll receive props] props.state before update: ", this.state.myState);
+                console.log("[2 comp'll receive props] props.val before update: ", this.props.val);
+                console.log("[2 comp'll receive props] props.state before update: ", this.state.myState);
                 // NOTE: you have no access to the new props or state, only the prevous props or state
 
                 // NOTE: calling setState() inside this method will not trigger render
             },
+
+            render:function(){
+
+                console.log("[3 render               ] props.val after update: ", this.props.val);
+                console.log("[3 render               ] state.myState after update: ", this.state.myState );
+                return (
+                    <div>
+                        <p>state: {this.state.myState}</p>
+                        <p>props.val: {this.props.val}</p>
+                        <button onClick={this.updateState}>update state (note 1)</button>
+                        <button onClick={this.updateProps}>update props (note 2)</button>
+                        <p>note 1: will NOT invoke componentWillReceiveProps</p>
+                        <p>note 2: will invoke componentWillReceiveProps</p>
+                    </div>
+                )
+            },
+
+            componentDidMount:function(){
+                console.log("[4 component Did Mount  ]")
+            },
+
 
             // fifth
             componentWillUnmount:function(){
