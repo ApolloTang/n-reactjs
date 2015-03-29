@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <!-- <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" /> -->
+  <!-- can not use bellow, font fail to load due to cors violiation -->
+  <!-- <link rel="stylesheet" href="http://localhost:8001/bootstrap/v&#45;3.3.1/dist/css/bootstrap.min.css" /> -->
+    <script src="http://localhost:8001/js/lib/react-v0.12.2.js"></script>
+    <script src="http://localhost:8001/js/lib/JSXTransformer-v0.12.2.js"></script>
+</head>
+<body>
+
+<button onClick="render()">Render</button>
+<button onClick="unmount()">Unmount</button>
+<hr />
+<div id="panel"></div>
+
+<script type="text/jsx">
+    /** @jsx React.DOM */
+    var APP =
+        React.createClass({
+            getInitialState: function() {
+                return { myState:0}
+            },
+
+            updateState:function(){
+                console.log('updating sate');
+                var newState = this.state.myState+1;
+                this.setState({myState:newState});
+            },
+
+            updateProps:function(){
+                console.log('updating props');
+                var newVal = this.props.val+1;
+                this.setProps({val:newVal});
+            },
+
+            // first
+            componentWillMount:function(){
+                console.log("[1 component Will Mount ]")
+            },
+
+            // second
+            render:function(){
+
+                console.log("[2 render               ] props.val after update: ", this.props.val);
+                console.log("[2 render               ] state.myState after update: ", this.state.myState );
+                return (
+                    <div>
+                        <p>state: {this.state.myState}</p>
+                        <p>props.val: {this.props.val}</p>
+                        <button onClick={this.updateState}>update state</button>
+                        <button onClick={this.updateProps}>update props</button>
+                    </div>
+                )
+            },
+
+            // third
+            componentDidMount:function(){
+                console.log("[3 component Did Mount  ]")
+            },
+
+            // forth
+            componentWillReceiveProps: function(){
+                console.log("[4 comp'll receive props]");
+            },
+
+            shouldComponentUpdate: function(nextProps, nextState) {
+               // [!!] Since this method is call before render, I think it make more sense
+               // to call this method "shouldComponentToBeUpdate"
+
+                console.log("[5 should Comp update   ] before update,   this.props: ", this.props);
+                console.log("[5 should Comp update   ] props to become, nextProps:  ", nextProps);
+                console.log("[5 should Comp update   ] before update,   this.state: ", this.state);
+                console.log("[5 should Comp update   ] state to become, nextState:  ", nextState);
+
+                // Invoked before rendering when new props OR state are being received.
+                // This method is not called for the initial render
+                // This method is not called for when forceUpdate is used.
+
+                return true;
+                // if returns of this method is false, then render() will be skipped.
+                // (In addition, componentWillUpdate and componentDidUpdate will not be called.)
+
+                // You return false when transition to the new props and state will not require a component update.
+            },
+
+            // fifth
+            componentWillUnmount:function(){
+                console.log("[6 component'll unmount ]")
+            },
+
+        });
+
+        window.render = function(){
+            React.renderComponent( <APP val={0} />, document.getElementById('panel'))
+        }
+        window.unmount = function(){
+            React.unmountComponentAtNode(document.getElementById('panel'))
+        }
+</script>
+</body>
+</html>
