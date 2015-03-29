@@ -67,7 +67,9 @@
                 // This method is not called for the initial render.
                 // This method is not called for when state change via setState().
 
-                // Use this as an opportunity to react to a prop transition
+                // Use this method to intercept old props before it is update.
+
+                // Use this method as an opportunity to react to a prop transition
                 // before render() is trigger via this.setState()
 
                 // calling setState() inside this method will not trigger render
