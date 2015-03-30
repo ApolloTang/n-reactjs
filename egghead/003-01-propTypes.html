@@ -18,7 +18,7 @@
         propTypes:{
             arg_str: React.PropTypes.string,
             arg_num_optional:React.PropTypes.number,
-            arg_num_required:React.PropTypes.number.isRequired  // will throw warning bc it is not not specified in <App1 />
+            arg_num_required:React.PropTypes.number.isRequired  // this is flagged as required, so it will throw warning bc it is not not specified in <App1 />
         },
         render:function(){
             return (
