@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+    <script src="http://localhost:8001/js/lib/lodash-v2.4.1.js"></script>
+    <script src="http://localhost:8001/js/lib/backbone.radio-v0.9.0.js"></script>
+    <script src="http://localhost:8001/js/lib/react-v0.12.2.js"></script>
+    <script src="http://localhost:8001/js/lib/JSXTransformer-v0.12.2.js"></script>
+</head>
+<body>
+
+
+<div id="a"></div>
+<div id="b"></div>
+
+<script type="text/jsx">
+    /** @jsx React.DOM */
+
+    var ComponentItem = Reaction.createClass({
+        // set up var for uniqueId
+        onItemClicked: function() {
+           ch.trigger('item:onClicked', ref )
+        }
+        render:fucntion(){
+            return(
+                <li className={} ref={itemId} key={itemId} onClick={onItemClick} >{this.props.item}</li>
+            )
+        }
+    });
+
+    var Collection = Reaction.createClass({
+        getDefaultProps: function(){
+            return{
+                collection: [
+                    a1: 'a1',
+                    a2: 'a2',
+                    a3: 'a3',
+                    a4: 'a4',
+                    a5: 'a5'
+                 ]
+            }
+        }
+        render:fucntion(){
+
+            return(
+                <ul key={_.uniqueId()}>
+                    { this.props.collection.map(function(){
+
+                    });}
+                </ul>
+            )
+        }
+    });
+
+    React.render( <Collection />, document.body)
+
+</script>
+
+</body>
+</html>
