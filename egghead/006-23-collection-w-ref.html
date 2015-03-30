@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title></title>
     <script src="http://localhost:8001/js/lib/lodash-v2.4.1.js"></script>
+    <script src="http://localhost:8001/js/lib/backbone-1.1.2.js"></script>
     <script src="http://localhost:8001/js/lib/backbone.radio-v0.9.0.js"></script>
     <script src="http://localhost:8001/js/lib/react-v0.12.2.js"></script>
     <script src="http://localhost:8001/js/lib/JSXTransformer-v0.12.2.js"></script>
@@ -17,39 +18,42 @@
 <script type="text/jsx">
     /** @jsx React.DOM */
 
-    var ComponentItem = Reaction.createClass({
-        // set up var for uniqueId
-        onItemClicked: function() {
-           ch.trigger('item:onClicked', ref )
-        }
-        render:fucntion(){
+    var Item = React.createClass({
+        render:function(){
+            var id = _.uniqueId();
             return(
-                <li className={} ref={itemId} key={itemId} onClick={onItemClick} >{this.props.item}</li>
+                <li ref={id} >{this.props.item}</li>
             )
+        },
+        componentDidMount: function(){
+            console.log('Item, this.refs: ', this.refs)
         }
     });
 
-    var Collection = Reaction.createClass({
+    var Collection = React.createClass({
         getDefaultProps: function(){
             return{
                 collection: [
-                    a1: 'a1',
-                    a2: 'a2',
-                    a3: 'a3',
-                    a4: 'a4',
-                    a5: 'a5'
+                    { a1: 'a1'},
+                    { a2: 'a2'},
+                    { a3: 'a3'},
+                    { a4: 'a4'},
+                    { a5: 'a5'}
                  ]
             }
-        }
-        render:fucntion(){
-
+        },
+        render: function(){
             return(
-                <ul key={_.uniqueId()}>
-                    { this.props.collection.map(function(){
-
-                    });}
+                <ul>
+                    { this.props.collection.map(function(i){
+                        var id = _.uniqueId();
+                        return React.createElement( Item, {ref:id, key:id, item:i} );
+                    })}
                 </ul>
             )
+        },
+        componentDidMount: function(){
+            console.log('Collection, this.refs: ', this.refs)
         }
     });
 
