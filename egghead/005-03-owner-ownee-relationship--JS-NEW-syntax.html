@@ -43,7 +43,8 @@
             return (
                 <div>
                     <Widget txt={this.state.txt_1} update={this.updateTxt_1} />
-                    {Widget({txt:this.state.txt_2, update:this.updateTxt_2})}  {/* <--- old js syntax, for new syntax see https://gist.github.com/sebmarkbage/ae327f2eda03bf165261 */}
+                    {React.createElement( Widget, {txt:this.state.txt_2, update:this.updateTxt_2} )}
+                    {/* ^^^^^^^^^^^^^^^^--- see https://gist.github.com/sebmarkbage/ae327f2eda03bf165261 */}
                 </div>
             )
         }

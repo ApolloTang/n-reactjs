@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>}
+    <script src="http://localhost:8001/js/lib/lodash-v2.4.1.js"></script>
+    <script src="http://localhost:8001/js/lib/react-v0.12.2.js"></script>
+    <script src="http://localhost:8001/js/lib/JSXTransformer-v0.12.2.js"></script>
+</head>
+<body>
+
+
+<div id="a"></div>
+<div id="b"></div>
+
+<script type="text/jsx">
+    /** @jsx React.DOM */
+
+    var Item = React.createClass({
+        render:function(){
+            return(
+                <li>{this.props.item}</li>
+            )
+        }
+    });
+
+    var Collection = React.createClass({
+        getDefaultProps: function(){
+            return{
+                collection: [
+                    { a1: 'a1'},
+                    { a2: 'a2'},
+                    { a3: 'a3'},
+                    { a4: 'a4'},
+                    { a5: 'a5'}
+                 ]
+            }
+        },
+        render: function(){
+            return(
+                <ul>
+                    { this.props.collection.map(function(i){
+                        return React.createElement( Item, {key:_.uniqueId(), item:i} );
+                    })}
+                </ul>
+            )
+        }
+    });
+
+    React.render( <Collection />, document.body)
+
+</script>
+
+</body>
+</html>
