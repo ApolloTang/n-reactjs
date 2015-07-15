@@ -19,7 +19,7 @@
             return {sliderValue:0}
         },
         sliderChange: function(e) {
-            this.props.update()
+            this.props.update()  // <---- important, this will call updateColor() in APP
             this.setState({sliderValue:e.target.value});
         },
         render:function(){
@@ -44,6 +44,7 @@
         },
         updateColor:function(e){
             this.setState({
+                // set state for current component according to value of child component
                 red   :this.refs.red.refs.slider.getDOMNode().value,
                 green :this.refs.green.refs.slider.getDOMNode().value,
                 blue  :this.refs.blue.refs.slider.getDOMNode().value
@@ -52,9 +53,12 @@
         render:function(){
             return (
                 <div>
-                    <Slider id="red"   ref="red"   update={this.updateColor} /> <label htmlFor="red"  >App:red: {this.state.red}  </label>
-                    <Slider id="green" ref="green" update={this.updateColor} /> <label htmlFor="green">App:green: {this.state.green}</label>
-                    <Slider id="blue"  ref="blue"  update={this.updateColor} /> <label htmlFor="blue" >App:blue: {this.state.blue} </label>
+                    <Slider id="red"   ref="red"   update={this.updateColor} />
+                        <label htmlFor="red"  >App:red: {this.state.red}  </label>
+                    <Slider id="green" ref="green" update={this.updateColor} />
+                        <label htmlFor="green">App:green: {this.state.green}</label>
+                    <Slider id="blue"  ref="blue"  update={this.updateColor} />
+                        <label htmlFor="blue" >App:blue: {this.state.blue} </label>
                </div>
             )
         }
