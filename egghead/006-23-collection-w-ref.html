@@ -20,9 +20,14 @@
 
     var Item = React.createClass({
         render:function(){
-            var id = _.uniqueId();
+            var id1 = 'id1-generted-in-item-'+_.uniqueId();
+            var id2 = 'id2-generted-in-item-'+_.uniqueId();
             return(
-                <li ref={id} >{this.props.item}</li>
+                <li>
+                    <span ref={id1} >{this.props.item} - one </span>
+                    &nbsp;
+                    <span ref={id2} >{this.props.item} - two </span>
+                </li>
             )
         },
         componentDidMount: function(){
@@ -46,14 +51,16 @@
             return(
                 <ul>
                     { this.props.collection.map(function(i){
-                        var id = _.uniqueId();
-                        return React.createElement( Item, {ref:id, key:id, item:i} );
+                        var id = 'id-generated-in-collection-'+_.uniqueId();
+                        return <Item ref={id} key={id} item={i} />;
                     })}
                 </ul>
             )
         },
         componentDidMount: function(){
             console.log('Collection, this.refs: ', this.refs)
+            console.log('- - - - - - - - - - - - - - - - - - - - - - - - -' )
+            for (var k in this.refs) { console.log(k, this.refs[k].refs)}
         }
     });
 
