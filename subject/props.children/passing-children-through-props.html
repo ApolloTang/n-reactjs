@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>props.children--single-child</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="http://localhost:8001/css/lib/normalize&#45;2.1.2.css"> -->
+    <style media="screen" type="text/css">
+    </style>
+</head>
+
+<body>
+
+<div id='root'></div>
+
+<script src="http://localhost:8001/js/lib/lodash-v2.4.1.js"></script>
+<script src="http://localhost:8001/js/lib/babel-core--browser.js"></script>
+<script src="http://localhost:8001/js/lib/redux.js"></script>
+<script src="http://localhost:8001/js/lib/React.js"></script>
+<script src="http://localhost:8001/js/lib/ReactDOM.js"></script>
+<script src="http://localhost:8001/js/lib/expect.js"></script>
+<script src="http://localhost:8001/js/lib/deep-freeze.js"></script>
+<script type="text/babel">
+
+const Child = React.createClass({
+    render() {
+        return (<h1>Child</h1>);
+    }
+});
+
+const Layout =  React.createClass({
+    render() {
+        const ChildInProps = this.props.child1;
+        const ChildInProps2 = (<this.props.child1/>);
+        return (
+            <div>
+                <h1>Layout</h1>
+                <div>1 {<ChildInProps/>}      </div>
+                <div>2 <ChildInProps/>        </div>
+                <div>3 {<this.props.child1/>} </div>
+                <div>4 <this.props.child1/>   </div>
+                <div>5 {this.props.child1 } ** did not render **  </div>
+                <div>6 {ChildInProps2 } </div>
+            </div>
+        );
+    }
+});
+
+const Page = React.createClass({
+    render() {
+        return (
+            <div>
+                <Layout child1={Child} />
+            </div>
+        );
+    }
+});
+
+
+ReactDOM.render(
+    <Page />,
+    document.getElementById('root')
+);
+</script>
+</body>
+
+</html>
